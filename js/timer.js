@@ -1,7 +1,7 @@
 
 // Set the date we're counting down to
 
-var startDate = new Date("Nov 5, 2017 11:11:11 UTC");
+var startDate = new Date("Nov 11, 2017 11:11:11 UTC");
 
 var numSaleDays = 1000;
 var BonusDays1 = 1;
