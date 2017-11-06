@@ -494,14 +494,14 @@ section#timeline article:nth-child(10) div.inner h2:after {
     Multicoloured Hover Variations
 */
  
- #social-fb:hover {
-     color: #3B5998;
+ #social-gh:hover {
+     color: black;
  }
  #social-tw:hover {
      color: #4099FF;
  }
- #social-gp:hover {
-     color: #d34836;
+ #social-rd:hover {
+     color: white;
  }
  #social-em:hover {
      color: #d34836;
