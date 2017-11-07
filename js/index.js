@@ -65,3 +65,11 @@ copyGreedAddress.addEventListener('click', function(event) {
   // removeRange(range) when it is supported  
   window.getSelection().removeAllRanges();  
 });
+
+$(window).scroll(function () {
+if ($(window).scrollTop() >= 50) {
+$('nav').css('background','#772953');
+} else {
+$('nav').css('background','transparent');
+}
+});
