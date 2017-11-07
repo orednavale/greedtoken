@@ -8,7 +8,7 @@ header,
 }
 
 #intro {
-    background: url("../greed3.jpg")no-repeat center center fixed;
+    background: url("../greed3.jpg")no-repeat 0px 0px ;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -506,3 +506,4 @@ section#timeline article:nth-child(10) div.inner h2:after {
  #social-em:hover {
      color: #d34836;
  }
+
