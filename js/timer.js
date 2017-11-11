@@ -63,17 +63,20 @@ var x = setInterval(function() {
 			distance = endDate.getTime() - now;
 			elapsed = now - startDate.getTime(); 
 			tmlf = timeleft(distance);			
-			var alltime = endDate.getTime() - startDate.getTime();
-			var timePercent = parseFloat((100 * (elapsed / alltime)).toFixed(2));
-			var raisedPercent = parseFloat((100 * (GreedTokenIco.totalTokensSold() / GreedTokenIco.icoSupply())).toFixed(2));
-			var percent = Math.max(timePercent, raisedPercent);
 			endingText = endText + tmlf[0] + " Days " + tmlf[1] + " Hours " + tmlf[2] + " Mins " + tmlf[3] + " Secs";
 			document.getElementById("timer").innerHTML = "<strong>" + endingText + "</strong>";
 			document.getElementById("tiles").innerHTML = "<span>" + tmlf[0] + "</span><span>" +  tmlf[1] + "</span><span>" + tmlf[2] + "</span><span>" + tmlf[3] + "</span>"; 
 			document.getElementById("cd-title").innerHTML = "<strong>WORLD'S BIGGEST ICO BONUS IS NOW LIVE</strong><br><br>";
-			document.getElementById("stats").innerHTML = '<h5 align="center"><strong>Current Bonus : ' + toEthString(GreedTokenIco.bonusMultiplier()) + 'x&emsp;Total Tokens Sold : ' + toEthString(GreedTokenIco.totalTokensSold()) + '&emsp;Total ETHs Raised : ' + toEthString(GreedTokenIco.totalRaised()) + '</strong><br><br></h5>';
-			document.getElementById("progressBar").style.display = "block";
-			progressBar(percent, $('#progressBar'));
+			if (now % 60 == 0) {
+			var alltime = endDate.getTime() - startDate.getTime();
+			var timePercent = parseFloat((100 * (elapsed / alltime)).toFixed(2));
+			var raisedPercent = parseFloat((100 * (GreedTokenIco.totalTokensSold() / GreedTokenIco.icoSupply())).toFixed(2));
+			var percent = Math.max(timePercent, raisedPercent);
+
+				document.getElementById("stats").innerHTML = '<h5 align="center"><strong>Current Bonus : ' + toEthString(GreedTokenIco.bonusMultiplier()) + 'x&emsp;Total Tokens Sold : ' + toEthString(GreedTokenIco.totalTokensSold()) + '&emsp;Total ETHs Raised : ' + toEthString(GreedTokenIco.totalRaised()) + '</strong><br><br></h5>';
+				document.getElementById("progressBar").style.display = "block";
+				progressBar(percent, $('#progressBar'));
+			}
 	} else {
 			clearInterval(x);
 			document.getElementById("contrib").innerHTML = '';
