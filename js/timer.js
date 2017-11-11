@@ -48,7 +48,6 @@ var x = setInterval(function() {
     var now = nowdate.getTime();
     var distance = startDate.getTime() - now;
 	var tmlf = timeleft(distance);	
-
     
     if (startDate.getTime() > now) {
 		document.getElementById("timer").innerHTML = "<strong>" + startText + tmlf[0] + " Days " + tmlf[1] + " Hours " + tmlf[2] + " Mins " + tmlf[3] + " Secs" + "</strong>";
@@ -57,17 +56,24 @@ var x = setInterval(function() {
 		document.getElementById("cd-title").innerHTML = "<strong>WORLD'S BIGGEST ICO BONUS (1000X) STARTS IN</strong><br><br>";
 		document.getElementById("contribButt").innerHTML = contribButton2;
 		document.getElementById("stats").innerHTML = "";
-	} else if (endDate > now && !GreedTokenIco.icoFinished()) {
+		document.getElementById("progressBar").style.display = "none";
+	} else if (endDate.getTime() > now && !GreedTokenIco.icoFinished()) {
 		    document.getElementById("contrib").innerHTML = contribButton1;
 			document.getElementById("contribButt").innerHTML = contribButton3;
-			distance = endDate - now;
+			distance = endDate.getTime() - now;
+			elapsed = now - startDate.getTime(); 
 			tmlf = timeleft(distance);			
+			var alltime = endDate.getTime() - startDate.getTime();
+			var timePercent = parseFloat((100 * (elapsed / alltime)).toFixed(2));
+			var raisedPercent = parseFloat((100 * (GreedTokenIco.totalTokensSold() / GreedTokenIco.icoSupply())).toFixed(2));
+			var percent = Math.max(timePercent, raisedPercent);
 			endingText = endText + tmlf[0] + " Days " + tmlf[1] + " Hours " + tmlf[2] + " Mins " + tmlf[3] + " Secs";
 			document.getElementById("timer").innerHTML = "<strong>" + endingText + "</strong>";
 			document.getElementById("tiles").innerHTML = "<span>" + tmlf[0] + "</span><span>" +  tmlf[1] + "</span><span>" + tmlf[2] + "</span><span>" + tmlf[3] + "</span>"; 
 			document.getElementById("cd-title").innerHTML = "<strong>WORLD'S BIGGEST ICO BONUS IS NOW LIVE</strong><br><br>";
-			document.getElementById("stats").innerHTML = '<h5 align="center"><strong>Current Bonus :</strong>  ' + toEthString(GreedTokenIco.bonusMultiplier()) + 'x&emsp;<strong>Total Tokens Sold :</strong> ' + toEthString(GreedTokenIco.totalTokensSold()) + '&emsp;<strong>Total ETHs Raised :</strong> ' + toEthString(GreedTokenIco.totalRaised()) + '<br><br></h5>';
-
+			document.getElementById("stats").innerHTML = '<h5 align="center"><strong>Current Bonus : ' + toEthString(GreedTokenIco.bonusMultiplier()) + 'x&emsp;Total Tokens Sold : ' + toEthString(GreedTokenIco.totalTokensSold()) + '&emsp;Total ETHs Raised : ' + toEthString(GreedTokenIco.totalRaised()) + '</strong><br><br></h5>';
+			document.getElementById("progressBar").style.display = "block";
+			progressBar(percent, $('#progressBar'));
 	} else {
 			clearInterval(x);
 			document.getElementById("contrib").innerHTML = '';
@@ -75,7 +81,8 @@ var x = setInterval(function() {
 			document.getElementById("timer").innerHTML = "<strong>" + finishText + "</strong>";
 			document.getElementById("tiles").innerHTML = "<span>0</span><span>0</span><span>0</span><span>0</span>";
 			document.getElementById("cd-title").innerHTML = "<strong>TOKEN SALE IS FINISHED. THANK YOU CONTRIBUTORS!</strong><br><br>";
-			document.getElementById("stats").innerHTML = '<h5 align="center"><strong>Last Bonus :</strong>  ' + toEthString(GreedTokenIco.bonusMultiplier()) + 'x&emsp;<strong>Total GREEDs Sold :</strong> ' + toEthString(GreedTokenIco.totalTokensSold()) + '&emsp;<strong>Total ETHs Raised</strong> : ' + toEthString(GreedTokenIco.totalRaised()) + '<br><br></h5>';
+			document.getElementById("stats").innerHTML = '<h5 align="center"><strong>Last Bonus : ' + toEthString(GreedTokenIco.bonusMultiplier()) + 'x&emsp;Total GREEDs Sold : ' + toEthString(GreedTokenIco.totalTokensSold()) + '&emsp;Total ETHs Raised : ' + toEthString(GreedTokenIco.totalRaised()) + '</strong><br><br></h5>';
+			document.getElementById("progressBar").style.display = "none";
 	}
 	
     // Output the result in an element with id="demo"
@@ -105,4 +112,7 @@ function pad(n) {
 	return (n < 10 ? '0' : '') + n;
 }
 
-
+function progressBar(percent, $element) {
+	var progressBarWidth = percent * $element.width() / 100;
+	$element.find('div').animate({ width: progressBarWidth }, 500).html("<strong>" + percent + "%&nbsp;Completed&nbsp;</strong>");
+}

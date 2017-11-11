@@ -510,3 +510,18 @@ section#timeline article:nth-child(10) div.inner h2:after {
      color: #d34836;
  }
 
+.big-green {
+	border-radius: 10px;
+	padding: 5px;
+	background: #772953;
+	border: 1px solid #111;
+	box-shadow: 0 2px 3px #333;
+}
+
+.big-green div {
+	background: #f47321 top right;
+	border-radius: 6px;
+	box-shadow: 0 5px 5px #ccc inset;
+	text-align:right;
+	overflow: hidden;
+}
