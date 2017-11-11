@@ -38,7 +38,7 @@ var contribButton1 = '<button type="button" class="btn btn-deep-orange" data-tog
 var contribButton2 = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contribute" style="background:#772953"><strong>How To Contribute</strong></button>';
 var contribButton3 = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contribute" style="background:#772953"><strong>Contribute Now!</strong></button>';
 // Update the count down every 1 second
-
+var finished = false; 
 var x = setInterval(function() {
 
     // Get todays date and time
@@ -57,7 +57,7 @@ var x = setInterval(function() {
 		document.getElementById("contribButt").innerHTML = contribButton2;
 		document.getElementById("stats").innerHTML = "";
 		document.getElementById("progressBar").style.display = "none";
-	} else if (endDate.getTime() > now && !GreedTokenIco.icoFinished()) {
+	} else if (endDate.getTime() > now && !finished) {
 		    document.getElementById("contrib").innerHTML = contribButton1;
 			document.getElementById("contribButt").innerHTML = contribButton3;
 			distance = endDate.getTime() - now;
@@ -76,6 +76,7 @@ var x = setInterval(function() {
 				document.getElementById("stats").innerHTML = '<h5 align="center"><strong>Current Bonus : ' + toEthString(GreedTokenIco.bonusMultiplier()) + 'x&emsp;Total Tokens Sold : ' + toEthString(GreedTokenIco.totalTokensSold()) + '&emsp;Total ETHs Raised : ' + toEthString(GreedTokenIco.totalRaised()) + '</strong><br><br></h5>';
 				document.getElementById("progressBar").style.display = "block";
 				progressBar(percent, $('#progressBar'));
+				finished = GreedTokenIco.icoFinished();
 			}
 	} else {
 			clearInterval(x);
