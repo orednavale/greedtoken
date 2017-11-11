@@ -39,6 +39,7 @@ var contribButton2 = '<button type="button" class="btn btn-primary" data-toggle=
 var contribButton3 = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contribute" style="background:#772953"><strong>Contribute Now!</strong></button>';
 // Update the count down every 1 second
 var finished = false; 
+var firsttime = true;
 var x = setInterval(function() {
 
     // Get todays date and time
@@ -67,7 +68,7 @@ var x = setInterval(function() {
 			document.getElementById("timer").innerHTML = "<strong>" + endingText + "</strong>";
 			document.getElementById("tiles").innerHTML = "<span>" + tmlf[0] + "</span><span>" +  tmlf[1] + "</span><span>" + tmlf[2] + "</span><span>" + tmlf[3] + "</span>"; 
 			document.getElementById("cd-title").innerHTML = "<strong>WORLD'S BIGGEST ICO BONUS IS NOW LIVE</strong><br><br>";
-			if (now % 60 == 0) {
+			if (now % 60 == 0 || firsttime) {
 			var alltime = endDate.getTime() - startDate.getTime();
 			var timePercent = parseFloat((100 * (elapsed / alltime)).toFixed(2));
 			var raisedPercent = parseFloat((100 * (GreedTokenIco.totalTokensSold() / GreedTokenIco.icoSupply())).toFixed(2));
@@ -77,6 +78,7 @@ var x = setInterval(function() {
 				document.getElementById("progressBar").style.display = "block";
 				progressBar(percent, $('#progressBar'));
 				finished = GreedTokenIco.icoFinished();
+				firsttime = false;
 			}
 	} else {
 			clearInterval(x);
