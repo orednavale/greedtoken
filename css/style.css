@@ -516,6 +516,8 @@ section#timeline article:nth-child(10) div.inner h2:after {
 	background: #772953;
 	border: 1px solid #111;
 	box-shadow: 0 2px 3px #333;
+	margin-left:75px;
+	margin-right:75px;
 }
 
 .big-green div {
