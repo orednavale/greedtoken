@@ -503,8 +503,8 @@ section#timeline article:nth-child(10) div.inner h2:after {
  #social-tw:hover {
      color: #4099FF;
  }
- #social-rd:hover {
-     color: white;
+ #social-bc:hover {
+     color: #FFDF00;
  }
  #social-em:hover {
      color: #d34836;
